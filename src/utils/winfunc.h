@@ -1,9 +1,16 @@
 ﻿#pragma once
 
+#ifndef JUNUO_BASE_EXPORT
+#	ifdef JUNUO_BASE_MODULE
+#		define JUNUO_BASE_EXPORT __declspec(dllexport)
+#	else
+#		define JUNUO_BASE_EXPORT __declspec(dllimport)
+#	endif
+#endif
+
 #include <windows.h>
 #include <string>
 
-#include "src/global.h"
 #include <junuobase/junuoglobal.h>
 
 JUNUO_BEGIN_NAMESPACE_(junuobase)

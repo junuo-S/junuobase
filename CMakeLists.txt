@@ -1,10 +1,10 @@
 ﻿junuo_package(junuobase SHARED)
 junuo_sources(
     src/global.h
-    src/utils/winfunc.h
-    src/utils/winfunc.cpp
-    src/utils/stringconvert.h
-    src/utils/stringconvert.cpp
+    src/utils/processutils.h
+    src/utils/processutils.cpp
+    src/utils/stringutils.h
+    src/utils/stringutils.cpp
 )
-junuo_include_directories(. ../include)
+junuo_include_directories(./src ../include)
 junuo_compile_definitions(JUNUO_BASE_MODULE)

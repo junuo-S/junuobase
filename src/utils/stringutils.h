@@ -9,7 +9,13 @@
 
 #include <junuobase/junuoglobal.h>
 
-#include "global.h"
+#ifndef JUNUO_BASE_EXPORT
+#	ifdef JUNUO_BASE_MODULE
+#		define JUNUO_BASE_EXPORT __declspec(dllexport)
+#	else
+#		define JUNUO_BASE_EXPORT __declspec(dllimport)
+#	endif
+#endif
 
 JUNUO_BEGIN_NAMESPACE_(junuobase)
 JUNUO_BEGIN_NAMESPACE_(utils)

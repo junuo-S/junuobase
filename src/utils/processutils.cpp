@@ -16,8 +16,6 @@
 JUNUO_BEGIN_NAMESPACE_(junuobase)
 JUNUO_BEGIN_NAMESPACE_(utils)
 
-using namespace junuobase::utils;
-
 JUNUO_BASE_EXPORT DWORD GetProcessIdByName(const wchar_t* pName)
 {
 	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -165,6 +163,32 @@ JUNUO_BASE_EXPORT BOOL IsAddressInProcess(HANDLE hProcess, LPCVOID lpAddress)
 	if (VirtualQueryEx(hProcess, lpAddress, &mbi, sizeof(mbi)))
 		return mbi.AllocationBase != nullptr;
 	return FALSE;
+}
+
+JUNUO_BASE_EXPORT DWORD_PTR ByteArrayToAddress(BYTE* byte, size_t pointerLen)
+{
+	DWORD_PTR address = 0;
+	for (size_t index = 0; index < pointerLen; index++)
+	{
+		long long temp = byte[pointerLen - 1 - index];
+		address |= temp << pointerLen * (pointerLen - 1 - index);
+	}
+	return address;
+}
+
+JUNUO_BASE_EXPORT std::string DecToHex(size_t dec)
+{
+	static std::string hexBase = "0123456789ABCDEF";
+	std::string result;
+	while (dec != 0)
+	{
+		unsigned int temp = dec % 16;
+		result.insert(result.begin(), hexBase[temp]);
+		dec /= 16;
+	}
+	while (result.length() < 2)
+		result.insert(result.begin(), '0');
+	return result;
 }
 
 JUNUO_END_NAMESPACE

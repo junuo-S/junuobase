@@ -8,7 +8,13 @@
 
 #include <junuobase/junuoglobal.h>
 
-#include "global.h"
+#ifndef JUNUO_BASE_EXPORT
+#	ifdef JUNUO_BASE_MODULE
+#		define JUNUO_BASE_EXPORT __declspec(dllexport)
+#	else
+#		define JUNUO_BASE_EXPORT __declspec(dllimport)
+#	endif
+#endif
 
 JUNUO_BEGIN_NAMESPACE_(junuobase)
 JUNUO_BEGIN_NAMESPACE_(utils)
@@ -23,6 +29,8 @@ JUNUO_BASE_EXPORT std::wstring GetCurrentMoudlePath();
 JUNUO_BASE_EXPORT BOOL IsWx64BitExecutable(const std::wstring& exePath);
 JUNUO_BASE_EXPORT BOOL IsMemoryPageWritable(void* address);
 JUNUO_BASE_EXPORT BOOL IsAddressInProcess(HANDLE hProcess, LPCVOID lpAddress);
+JUNUO_BASE_EXPORT DWORD_PTR ByteArrayToAddress(BYTE* byte, size_t pointerLen);
+JUNUO_BASE_EXPORT std::string DecToHex(size_t dec);
 
 JUNUO_END_NAMESPACE
 JUNUO_END_NAMESPACE

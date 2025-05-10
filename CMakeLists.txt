@@ -4,7 +4,7 @@ junuo_sources(
     src/utils/processutils.cpp
     src/utils/stringutils.h
     src/utils/stringutils.cpp
-    src/async/junuoasynccallchain.hpp
+    src/async/junuoasynccall.hpp
 )
 junuo_include_directories(./src ../include)
 junuo_compile_definitions(JUNUO_BASE_MODULE)
